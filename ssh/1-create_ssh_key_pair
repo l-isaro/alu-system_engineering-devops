@@ -3,4 +3,4 @@
 
 passphrase = "betty"
 
-ssh keygen -t rsa -b 4096 -N "$passphrase" -f school
+ssh keygen -t rsa -b 4096 -f school -N "$passphrase"
