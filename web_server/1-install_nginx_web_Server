@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# installs nginx and configures it
+
+apt-get update
+apt-get -y install nginx
+
+echo "<html><body>Holberton School</body></html>" > ~/index.html
+
+printf %s "server{
+listen 8080
+root ~
+}"
+
+nginx -s reload
