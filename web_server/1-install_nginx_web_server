@@ -17,4 +17,4 @@ printf %s "server{
 
        }" > /etc/nginx/sites-available/default
 
-nginx -s reload
+service nginx restart
