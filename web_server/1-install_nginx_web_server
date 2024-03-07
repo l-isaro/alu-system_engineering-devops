@@ -1,20 +1,29 @@
 #!/usr/bin/env bash
-# installs nginx and configures it
+# Installing nginx on a server and configuring a simple server
 
-apt-get update
-apt-get -y install nginx
+# Updating packages
+sudo apt-get update -y && sudo apt-get upgrade -y
 
-echo "Holberton School" > /var/www/mywebsite.com/html/index.html
+# Installing nginx
+sudo apt-get install nginx -y
 
-printf %s "server{
-       listen	80 default_server;
-       listen	[::]:80 default_server;
-       root	/var/www/mywebsite.com/html/
-       index	index.html;
-       location / {
-       try_files $uri $uri/ =404;
-       }
+# Creating an index html file
+echo "Holberton School" | sudo tee /var/www/html/index.html
 
-       }" > /etc/nginx/sites-available/default
+# Altering the server config to create a server
+echo "
+events {
 
-service nginx restart
+}
+
+http {
+	server {
+		listen 80;
+		index index.html;
+		root /var/www/html;
+	}
+}
+"  | sudo tee /etc/nginx/nginx.conf
+
+# Restarting the server with the new config
+sudo service nginx restart
