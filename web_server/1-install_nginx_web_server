@@ -4,11 +4,17 @@
 apt-get update
 apt-get -y install nginx
 
-echo "<html><body>Holberton School</body></html>" > ~/webpage/index.html
+echo "<html><body>Holberton School</body></html>" > /var/www/mywebsite.com/html/index.html
 
 printf %s "server{
-listen 8080
-root ~/webpage
-}" > /etc/nginx/sites-available/default
+       listen 80;
+       listen [::]:80;
+       root /var/www/mywebsite.com/html/
+       index index.html;
+       location {
+       try_files $uri $uri/ =404;
+       }
+
+       }" > /etc/nginx/sites-available/default
 
 nginx -s reload
