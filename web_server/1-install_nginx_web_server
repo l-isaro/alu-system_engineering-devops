@@ -4,13 +4,13 @@
 apt-get update
 apt-get -y install nginx
 
-echo "<html><body>Holberton School</body></html>" > /var/www/mywebsite.com/html/index.html
+echo "Holberton School" > /var/www/mywebsite.com/html/index.html
 
 printf %s "server{
-       listen 80 default_server;
-       listen [::]:80 default_server;
-       root /var/www/mywebsite.com/html/
-       index index.html;
+       listen	80 default_server;
+       listen	[::]:80 default_server;
+       root	/var/www/mywebsite.com/html/
+       index	index.html;
        location / {
        try_files $uri $uri/ =404;
        }
