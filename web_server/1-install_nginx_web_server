@@ -8,7 +8,7 @@ echo "<html><body>Holberton School</body></html>" > ~/index.html
 
 printf %s "server{
 listen 8080
-root ~
+root ~/index.html
 }"
 
 nginx -s reload
