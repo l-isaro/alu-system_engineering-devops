@@ -1,41 +1,21 @@
 #!/usr/bin/env bash
-# Configure your Nginx server so that /redirect_me is redirecting to another page.
+#script redirects user to cuberule.com
 
-# Update package list
-sudo apt-get update
+apt-get update
+apt-get install -y nginx
 
-# Install Nginx
-sudo apt-get -y install nginx
-
-# Allow Nginx through the firewall
-sudo ufw allow 'Nginx HTTP'
-
-# Create index.html
-echo "Hoberlton School" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
-
-# Configure Nginx for redirection
-config_file="/etc/nginx/sites-available/default"
-redirect_config="\
-server {
-    listen 80 default_server;
+mkdir /etc/nginx/html
+touch /etc/nginx/html/index.html
+echo "Holberton School" > /etc/nginx/html/index.html
+printf %s "server {
+    listen 80;
     listen [::]:80 default_server;
-
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
-
-    server_name _;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
+    root   /etc/nginx/html;
+    index  index.html index.htm;
 
     location /redirect_me {
-        rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+        return 301 http://cuberule.com/;
     }
-}"
+}" > /etc/nginx/sites-available/default
 
-# Replace the existing server block with the new configuration
-echo "$redirect_config" | sudo tee "$config_file" > /dev/null
-
-# Start Nginx
-sudo service nginx start
+service nginx restart
