@@ -4,7 +4,7 @@
 sudo apt-get update
 sudo apt-get install haproxy
 
-cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.real.cfg
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.real.cfg
 
 echo "frontend http
   bind *:80
@@ -16,4 +16,5 @@ echo "frontend http
   server 5962-web-01 3.89.244.51:80 check
   server 5962-web-02 107.23.186.148:80 check
   " | sudo tee -a /etc/haproxy/haproxy.cfg
-  
+
+sudo systemctl restart haproxy
