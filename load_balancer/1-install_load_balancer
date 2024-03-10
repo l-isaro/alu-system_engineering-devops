@@ -1,20 +1,16 @@
 #!/usr/bin/env bash
-# install haproxy and load balancing
+# bash script that installs HAProxy & makes configurations to meet the following requirements:
 
-sudo apt-get update
-sudo apt-get install haproxy -y
-
-echo "
-frontend http_front
+apt-get -y install software-properties-common
+add-apt-repository ppa:vbernat/haproxy-1.8
+apt-get update
+apt-get -y install haproxy
+echo "ENABLED=1" >> /etc/default/haproxy
+printf %s "listen 5517-web
     bind *:80
     mode http
-    default_backend http_back
-
-backend http_back
     balance roundrobin
-    server web-01 52.90.3.235:80 check
-    server web-02 54.172.181.209:80 check
-" | sudo tee -a /etc/haproxy/haproxy.cfg
-echo "ENABLED=1" >> /etc/default/haproxy
-
+    server 5517-web-01 3.80.117.30:80 check
+    server 5517-web-02 54.227.173.17:80 check
+" >> /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
