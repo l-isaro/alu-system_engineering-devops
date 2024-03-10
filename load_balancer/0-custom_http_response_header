@@ -4,15 +4,11 @@
 apt-get update
 apt-get install -y nginx
 
-mkdir /etc/nginx/html
 
-touch /etc/nginx/html/index.html
-
-
-echo "Holberton School" > /var/www/html/index.html
+"Holberton School" | sudo tee /var/www/html/index.html
 
 # Create custom 404 error page
-Ceci n'est pas une page" | sudo tee /var/www/html/error_404.html
+"Ceci n'est pas une page" | sudo tee /var/www/html/error_404.html
 
 printf %s "server {
      listen      80 default_server;
