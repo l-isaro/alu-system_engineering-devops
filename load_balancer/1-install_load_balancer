@@ -5,6 +5,7 @@ apt-get -y install software-properties-common
 add-apt-repository ppa:vbernat/haproxy-1.8
 sudo apt-get update
 sudo apt-get install haproxy
+echo "ENABLED=1" | sudo tee /etc/default/haproxy
 
 sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.real.cfg
 
