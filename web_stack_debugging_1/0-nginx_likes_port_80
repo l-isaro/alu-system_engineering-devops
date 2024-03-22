@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#script debugs nginx server
+
+debugs server
